@@ -3,6 +3,8 @@
 from typing import List
 import re
 import logging
+from os import environ
+import mysql.connector
 
 
 # Fields to be redacted
@@ -50,3 +52,17 @@ def get_logger() -> logging.Logger:
     logger.addHandler(stream_handler)
 
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """returns a connector to the database (mysql.connector.connection.MySQLConnection object)."""
+    username = environ.get("PERSONAL_DATA_DB_USERNAME")
+    password = environ.get("PERSONAL_DATA_DB_PASSWORD")
+    host = environ.get("PERSONAL_DATA_DB_HOST")
+    name = environ.get("PERSONAL_DATA_DB_NAME")
+
+    getdb = mysql.connector.connection.MySQLConnection(user=username,
+                                                       password=password,
+                                                       host=host,
+                                                       database=name)
+    return getdb
