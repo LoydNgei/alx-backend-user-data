@@ -39,7 +39,7 @@ class RedactingFormatter(logging.Formatter):
         return super(RedactingFormatter, self).format(record)
 
 
-def get_logger():
+def get_logger() -> logging.Logger:
     """Func that takes no args and returns a logging_logger obj"""
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
