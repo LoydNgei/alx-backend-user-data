@@ -25,14 +25,14 @@ class Auth:
             elif ex_path[-1] == "*":
                 if path.startswith(ex_path[:-1]):
                     return False
-        
+
         return True
 
     def authorization_header(self, request=None) -> str:
         """Method authorization header"""
         if request is None:
             return None
-        
+
         header = request.headers.get('Authorization')
 
         if header is None:
