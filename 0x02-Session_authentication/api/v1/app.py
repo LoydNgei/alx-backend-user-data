@@ -16,7 +16,7 @@ auth = None
 
 AUTH_TYPE = os.getenv("AUTH_TYPE")
 
-
+# Check the AUTH_TYPE
 if AUTH_TYPE == 'auth':
     from api.v1.auth.auth import Auth
     auth = Auth()
@@ -27,7 +27,8 @@ elif AUTH_TYPE == 'basic_auth':
 
 @app.before_request
 def before_request():
-    """Filtering of each request"""
+    """Filtering of each request
+    """
     if auth is None:
         pass
     else:
@@ -41,8 +42,6 @@ def before_request():
             if auth.current_user(request) is None:
                 abort(403, description="Forbidden")
 
-result = auth.current_user(request)
-request.current_user = result
 
 @app.errorhandler(404)
 def not_found(error) -> str:
