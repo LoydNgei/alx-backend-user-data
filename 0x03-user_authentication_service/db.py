@@ -10,6 +10,7 @@ from sqlalchemy.exc import InvalidRequestError
 
 from user import Base, User
 
+
 class DB:
     """DB class
     """
@@ -42,7 +43,7 @@ class DB:
         """Method to find user from DB"""
         if not kwargs:
             raise InvalidRequestError
-        
+
         find_user = self._session.query(User).filter_by(**kwargs).first()
 
         if not find_user:
